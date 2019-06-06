@@ -17,6 +17,18 @@ int main()
 {	
 	int fd, k;
 	char buf[SIZE];	
+	const char *fifo_name = "my_fifo";
+	
+	if(access(fifo_name, F_OK) == -1)
+	{
+		int res = mkfifo(fifo_name, 0777);
+		if(res != 0)
+		{
+			fprintf(stderr, "Could not create fifo %s\n", fifo_name);
+			exit(EXIT_FAILURE);
+		}
+	}
+	
 	printf("father(%d) is waiting for his children···\n",getpid());
 	//sem_wait(&sem);
 	fd = open("my_fifo",O_RDONLY);
