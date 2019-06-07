@@ -1,6 +1,7 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
 #define READY 0x01		//	就绪态，用 1 标识
 #define RUNNING 0x02	//	运行态，用 2 标识
@@ -8,184 +9,153 @@
 
 typedef struct _PCB
 {   
-	int pid;			//	进程号
-	int state;  		//	进程状态
-	int time;  			//	仍需运行的时间
+	int pid;				//	进程号
+	int state;  			//	进程状态
+	int time;  				//	仍需运行的时间
     struct _PCB *next; 		//	指向下一个进程
 } PCB, *pPCB;
 
-pPCB Create(int n)
-{
-	//	创建链表的函数，返回值为链表头节点
-	int i;
-	pPCB head, tail, pnew;
-	
-	//	头结点不存放实际数据，初始化全存 -1，方便对链表进行排序
-	head = (struct _PCB *)malloc(sizeof(struct _PCB));
-	head->pid = -1;
-	head->state = -1;
-	head->time = -1;
-	
-	pnew = (struct _PCB *)malloc(sizeof(struct _PCB));
-	pnew->pid = 0;
-	pnew->state = READY;
-	scanf("%d",&pnew->time);
-	head->next = tail = pnew;
-	
-	//	从链表的第二个结点开始储存进程信息
-	for(i = 1; i < n; i++)
-	{
-		pnew = (struct _PCB *)malloc(sizeof(struct _PCB));
-		pnew->pid = i;
-		pnew->state = READY;
-		scanf("%d", &pnew->time);
-		tail->next = pnew;
-		tail = pnew;
-	}
-	tail->next = NULL;
-	return head;
-}
+pPCB readyQueue = NULL;
+pPCB runningQueue = NULL;
 
-pPCB Append(pPCB Queue, pPCB pNew)
+void AppendReadyQueue(int pid,int time)
 {
-	//	增添函数，功能是在链表末尾增加一个结点
-	while(Queue->next)		//	这个循环的作用是找到链表的最后一个结点
-	{
-		printf("***** Append : pid = %d\n",Queue->pid);
-		Queue = Queue->next;
-	}
-	pNew = (struct _PCB *)malloc(sizeof(struct _PCB));
-	pNew->next = NULL;
-	Queue->next = pNew;		//	把 pnew 放至队尾
-	Queue->next->state = READY;		//	状态切换成 ready
-}
+	pPCB temp;
+	pPCB proc = (pPCB)malloc(sizeof(PCB));
+	proc->pid = pid;
+	proc->time = time;
+	proc->state = READY;
+	proc->next = NULL;
 
-void Delete(pPCB Queue, int pid)
-{
-	//	删除函数，根据进程号删除指定进程(删除就绪队列队首结点)，flag用来标记操作是否成功
-	int flag = 0;
-	while(Queue)
-	{
-		if( Queue->pid == pid )
-		{
-			printf("***** Delete : pid = %d\n",Queue->pid);
-			Queue->next = Queue->next->next;
-			flag = 1;
+	if (!proc){
+		exit(0);
+	}else if (readyQueue->next == NULL){
+		readyQueue->next = proc;
+	}else{
+		temp = readyQueue->next;
+		while(temp->next!=NULL){
+			temp=temp->next;
 		}
-		Queue = Queue->next;
+		temp->next = proc;
 	}
-	if(!flag)
-		printf("Delete Error! Check the pid ( %d ).\n",pid);
 }
 
-void Sort(pPCB Queue)
+void DeleteReadyQueue()
 {
-	//	排序函数，采用的是冒泡排序
-    struct _PCB *head, *tail, *before, *current, *next, *temp;	//	temp 用作辅助交换
-    head = Queue;
-    tail = NULL;
-    // 从链表头开始将较大值往后沉，最终得到一列关键字从小到大的序列
-    while(head->next != tail)
-    {
-        for(before = head, current = before->next, next = current->next;
-			next != tail;
-			before = before->next, current = current->next, next = next->next)
-        {
-            // 相邻的结点比较关键字 time
-            if(current->time > next->time)
-            {
-                current->next = next->next;
-                before->next = next;
-                next->next = current;
-                temp = next;
-                next = current;
-                current = temp;
-            }
-        }
-        tail = current;		// 尾结点向前移动一位，然后执行下一个while循环
-    }
-}
-
-void Run(pPCB Queue, int pid)
-{
-	//	进程每执行一次，time - 2，flag 用作标记操作是否成功
-	int flag = 0;
-	printf("===> Process %d start running.\n",Queue->pid);
-	while(Queue->next)
+	pPCB temp;
+	if (readyQueue->next == NULL)
+		exit(0);
+	else
 	{
-		printf("***** Run : pid = %d\t flag = %d \n",Queue->pid,flag);
-		if( Queue->pid == pid )				//	找到这个进程
-		{
-			printf("***** Found pid = %d\n",Queue->pid);
-			Queue->state = RUNNING;			//	状态切换为 running
-			Queue->time = Queue->time - 2;	//	time - 2
-			flag = 1;
+		temp = readyQueue->next;
+	    readyQueue->next = temp->next;
+	    free(temp);
+	}
+}
+
+void AppendRunningQueue(int pid,int time)
+{
+	pPCB temp;
+	pPCB proc = (pPCB)malloc(sizeof(PCB));
+	proc->pid = pid;
+	proc->time = time;
+	proc->state = RUNNING;
+	proc->next = NULL;
+
+	if (!proc){
+		exit(0);
+	}else if (runningQueue->next == NULL){
+		runningQueue->next = proc;
+	}else{
+		temp = runningQueue->next;
+		while(temp->next!=NULL){
+			temp=temp->next;
 		}
-		Queue = Queue->next;
+		temp->next = proc;
 	}
-	printf("===> Process %d ended.\n",Queue->pid);
-	if(!flag)
-		printf("Run Error ! check the pid ( %d ).\n",pid);
 }
 
-pPCB  Scheduler_FCFS(pPCB Queue)
+void DeleteRunningQueue()
 {
-	pPCB p;
-	//	先来先服务调度
-	while(Queue && Queue->next)		//	首先判断就绪队列不为空
+	pPCB temp;
+	if (runningQueue->next == NULL)
+		exit(0);
+	else
 	{
-		printf("===> Before scheduler , Queue : pid = %d \t time = %d \n",Queue->pid,Queue->time);
-		if( Queue->time <= 0 )					//	删除 time <= 0 的进程
-			Delete(Queue,Queue->pid);
-		else {
-			Delete(Queue,Queue->pid);			//	先从就绪队列队首删除这个进程
-			printf("===> After Delete , Queue : pid = %d \t time = %d \n",Queue->pid,Queue->time);
-			p = (struct _PCB *)malloc(sizeof(struct _PCB));
-			//p = head;
-			Run(Queue,Queue->pid);		//	再执行这个的进程 （state = RUNNING）
-			printf("===> After Run , Queue : pid = %d \t time = %d \n",Queue->pid,Queue->time);
-			p->pid = Queue->pid;
-			p->state = Queue->state;
-			p->time = Queue->time;
-			Append(Queue->next,p);				//	执行完后，插入到就绪队列队尾 （state = READY）
-			printf("===> After Append , Queue : pid = %d \t time = %d \n",Queue->pid,Queue->time);
-			printf("\n");
-		}					
-		Queue = Queue->next;
+		temp = runningQueue->next;
+		runningQueue->next = temp->next;
+		free(temp);
 	}
 }
 
-pPCB  Scheduler_SPF(pPCB Queue)
+void sort()
 {
+	//	如果是短进程优先，则需要按照长短排序
+	pPCB p = readyQueue->next;
+	pPCB temp = (pPCB)malloc(sizeof(pPCB));
+	pPCB q;
+	pPCB r;
+	while(p!=NULL)
+	{
+		q = p;
+		r = p;
+		while(q!=NULL)
+		{
+			if (q->time < r->time)
+				r = q;
+			q = q->next;
+		}
+		
+		temp->pid = r->pid;
+		temp->time = r->time;
+		r->pid = p->pid;
+		r->time = p->time;
+		p->pid = temp->pid;
+		p->time = temp->time;
+		
+		p = p->next;
+	}
+}
+
+void modifyPCBState(pPCB p)
+{
+	if (readyQueue->next == p)
+	{
+		printf(" P0%d",p->pid);
+		AppendRunningQueue(p->pid,p->time);
+		DeleteReadyQueue();
+	}
+	if (runningQueue->next == p)
+	{
+		p->time = p->time-TIMESLICE;
+		
+		if (p->time <= 0)
+			DeleteRunningQueue();
+		else
+		{
+			AppendReadyQueue(p->pid,p->time);
+			DeleteRunningQueue();
+		}
+		
+	}
+}
+
+int main(){
 	
-}
-
-void Print(pPCB Queue)
-{
-	//	打印函数 只打印学号
-	while(Queue)
-	{
-		if( Queue->pid >= 0 )
-		{
-			if( Queue )
-			{
-				printf("进程号：%d\t",Queue->pid);
-				printf("仍需运行时间：%d\n",Queue->time);
-			}
-		}
-		Queue = Queue->next;
-	}
-}
-
-int main()
-{
-	int n;
-	char str[20], cmd[3][20];		//	str字符串用来存键入的调度方式（ FCFS / SPF）
-	pPCB ReadyQueue, RunningQueue;
+	int i, n;
+	int time[100];
+	char str[20], cmd[5][20];		//	str字符串用来存键入的调度方式（ FCFS / SPF）
+	
+	readyQueue = (pPCB)malloc(sizeof(PCB));
+	readyQueue->next = NULL;
+	runningQueue = (pPCB)malloc(sizeof(PCB));
+	runningQueue->next = NULL;
 	
 	strcpy(cmd[0],"q");			//	q 为退出命令
 	strcpy(cmd[1],"fcfs");		//	先来先服务	
-	strcpy(cmd[2],"SPF");		//	短进程优先
+	strcpy(cmd[2],"FCFS");
+	strcpy(cmd[3],"spf");		//	短进程优先
+	strcpy(cmd[4],"SPF");
 	strcpy(str,"0");
 	
 	while( strcmp(str,cmd[0]) != 0 )
@@ -193,25 +163,28 @@ int main()
 		if( scanf("%s", str) != EOF )		//	调度方式
 		{
 			scanf("%d",&n);					//	进程个数
-			ReadyQueue = Create(n);			//	创建就绪队列
-			printf("Created succussfully ! pid = %d\n",ReadyQueue->pid);
-			if ( strcmp(str,cmd[1]) == 0 ) {		//	选用先来先服务调度
-				Print(ReadyQueue);
-				printf("\n===Begin===\n");
-				Scheduler_FCFS(ReadyQueue->next);
-				printf("===End===\n");
+			for (i = 0; i < n; i++)
+			{
+				scanf("%d",&time[i]);
+				AppendReadyQueue(i,time[i]);
 			}
-			else if (strcmp(str,cmd[2]) == 0) {		//	选用短进程，需要先排序
-				Sort(ReadyQueue);
-				Print(ReadyQueue);
-			} else {
+			if ( strcmp(str,cmd[1]) == 0 || strcmp(str,cmd[2]) == 0 ) {		//	选用先来先服务调度
+				printf("fcfs order:");
+				while(readyQueue->next != NULL || runningQueue->next != NULL){
+					modifyPCBState(readyQueue->next);
+					modifyPCBState(runningQueue->next);
+				}
+			} else if ( strcmp(str,cmd[3]) == 0 || strcmp(str,cmd[4]) == 0 ) {		//	选用短进程，需要先排序
+				printf("spf order:");
+				sort();
+				while(readyQueue->next != NULL || runningQueue->next != NULL){
+					modifyPCBState(readyQueue->next);
+					sort();
+					modifyPCBState(runningQueue->next);
+				}
+			} else 
 				strcpy(str,"q");
-			}
-		} else 
-			strcpy(str,"q");
+		}
 	}
-	
 	return 0;
-	
-	
 }
