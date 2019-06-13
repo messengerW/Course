@@ -1,0 +1,158 @@
+Release 14.7 ngdbuild P.20131013 (nt)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+Command Line: C:\ISE\14.7\ISE_DS\ISE\bin\nt\unwrapped\ngdbuild.exe -intstyle ise
+-dd _ngo -sd ipcore_dir -nt timestamp -uc TOP_LED.ucf -p xc6slx16-csg324-3
+TOP_RI_CPU.ngc TOP_RI_CPU.ngd
+
+Reading NGO file
+"C:/ISE/workspace/Computer-Experiment-on-the-principle-of-computer-composition-m
+aster/R_I_instruction/TOP_RI_CPU.ngc" ...
+Loading design module "ipcore_dir/RAM_B.ngc"...
+Loading design module "ipcore_dir/Inst_ROM.ngc"...
+Gathering constraint information from source properties...
+Done.
+
+Annotating constraints to design from ucf file "TOP_LED.ucf" ...
+Resolving constraint associations...
+Checking Constraint Associations...
+ERROR:ConstraintSystem:59 - Constraint <NET "LED[7]" LOC = T11;>
+   [TOP_LED.ucf(3)]: NET "LED[7]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "LED[7]" LOC = T11;> [TOP_LED.ucf(3)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "LED[6]" LOC = R11;>
+   [TOP_LED.ucf(4)]: NET "LED[6]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "LED[6]" LOC = R11;> [TOP_LED.ucf(4)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "LED[5]" LOC = N11;>
+   [TOP_LED.ucf(5)]: NET "LED[5]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "LED[5]" LOC = N11;> [TOP_LED.ucf(5)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "LED[4]" LOC = M11;>
+   [TOP_LED.ucf(6)]: NET "LED[4]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "LED[4]" LOC = M11;> [TOP_LED.ucf(6)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "LED[3]" LOC = V15;>
+   [TOP_LED.ucf(7)]: NET "LED[3]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "LED[3]" LOC = V15;> [TOP_LED.ucf(7)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "LED[2]" LOC = U15;>
+   [TOP_LED.ucf(8)]: NET "LED[2]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "LED[2]" LOC = U15;> [TOP_LED.ucf(8)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "LED[1]" LOC = V16;>
+   [TOP_LED.ucf(9)]: NET "LED[1]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "LED[1]" LOC = V16;> [TOP_LED.ucf(9)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "LED[0]" LOC = U16;>
+   [TOP_LED.ucf(10)]: NET "LED[0]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "LED[0]" LOC = U16;> [TOP_LED.ucf(10)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "SW[3]" LOC = M8;>
+   [TOP_LED.ucf(11)]: NET "SW[3]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "SW[3]" LOC = M8;> [TOP_LED.ucf(11)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "SW[2]" LOC = V9;>
+   [TOP_LED.ucf(12)]: NET "SW[2]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "SW[2]" LOC = V9;> [TOP_LED.ucf(12)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "SW[1]" LOC = T9;>
+   [TOP_LED.ucf(13)]: NET "SW[1]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "SW[1]" LOC = T9;> [TOP_LED.ucf(13)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "SW[0]" LOC = T10;>
+   [TOP_LED.ucf(14)]: NET "SW[0]" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "SW[0]" LOC = T10;> [TOP_LED.ucf(14)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "oclk" LOC = C9;> [TOP_LED.ucf(17)]:
+   NET "oclk" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "oclk" LOC = C9;> [TOP_LED.ucf(17)]' could not be found and so the
+   Locate constraint will be removed.
+
+Done...
+
+Checking expanded design ...
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+NGDBUILD Design Results Summary:
+  Number of errors:    13
+  Number of warnings:  13
+
+Total memory usage is 162252 kilobytes
+
+Total REAL time to NGDBUILD completion:  4 sec
+Total CPU time to NGDBUILD completion:   4 sec
+
+One or more errors were found during NGDBUILD.  No NGD file will be written.
+
+Writing NGDBUILD log file "TOP_RI_CPU.bld"...

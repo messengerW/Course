@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "C:/ISE/workspace/Computer-Experiment-on-the-principle-of-computer-composition-master/R_I_instruction/test_isim_beh.exe" -prj "C:/ISE/workspace/Computer-Experiment-on-the-principle-of-computer-composition-master/R_I_instruction/test_beh.prj" "work.test" "work.glbl" 

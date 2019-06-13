@@ -1,0 +1,3 @@
+xst -intstyle ise -ifn "C:/ISE/workspace/Computer-Experiment-on-the-principle-of-computer-composition-master/R_I_instruction/TOP_RI_CPU.xst" -ofn "C:/ISE/workspace/Computer-Experiment-on-the-principle-of-computer-composition-master/R_I_instruction/TOP_RI_CPU.syr" 
+ngdbuild -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc TOP_LED.ucf -p xc6slx16-csg324-3 TOP_RI_CPU.ngc TOP_RI_CPU.ngd  
+xst -intstyle ise -ifn "C:/ISE/workspace/Computer-Experiment-on-the-principle-of-computer-composition-master/R_I_instruction/TOP_RI_CPU.xst" -ofn "C:/ISE/workspace/Computer-Experiment-on-the-principle-of-computer-composition-master/R_I_instruction/TOP_RI_CPU.syr" 

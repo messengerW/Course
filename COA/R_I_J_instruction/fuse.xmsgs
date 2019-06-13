@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="Simulator" num="1010" delta="unknown" >One or more environment variables have been detected which affect the operation of the C compiler. These are typically not set in standard installations and are not tested by Xilinx, however they may be appropriate for your system, so the flow will attempt to continue.  If errors occur, try running fuse with the &quot;-mt off -v 1&quot; switches to see more information from the C compiler. The following environment variables have been detected:
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="751" delta="unknown" >"C:/ISE/workspace/Computer-Experiment-on-the-principle-of-computer-composition-master/R_I_J_instruction/pc.v" Line 23: Redeclaration of ansi port <arg fmt="%s" index="1">PC</arg> is not allowed
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="751" delta="unknown" >"C:/ISE/workspace/Computer-Experiment-on-the-principle-of-computer-composition-master/R_I_J_instruction/TOP_RIJ_CPU.v" Line 44: Redeclaration of ansi port <arg fmt="%s" index="1">F</arg> is not allowed
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="751" delta="unknown" >"C:/ISE/workspace/Computer-Experiment-on-the-principle-of-computer-composition-master/R_I_J_instruction/TOP_RIJ_CPU.v" Line 49: Redeclaration of ansi port <arg fmt="%s" index="1">PC</arg> is not allowed
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="604" delta="unknown" >"C:/ISE/workspace/Computer-Experiment-on-the-principle-of-computer-composition-master/R_I_J_instruction/TOP_LED.v" Line 33: Module instantiation should have an instance name
+</msg>
+
+<msg type="error" file="Simulator" num="793" delta="unknown" >Unable to elaborate instantiated module <arg fmt="%s" index="1">TOP_RIJ_CPU</arg>
+</msg>
+
+</messages>
+
